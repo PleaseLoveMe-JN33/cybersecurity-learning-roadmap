@@ -862,3 +862,517 @@ for i in range(1, 21):
 工资发完了，下个月领取吧。
 ```
 
+## 第四章   函数
+
+### 4.1   函数介绍
+
+函数是指**组织好的，可重复使用的**，用来实现特定功能的**代码段**
+
+函数的定义：
+
+```
+def 函数名(传入参数):
+
+       函数体
+
+       return 返回值
+```
+
+- 传入参数如果不需要，可省略
+- 返回值如果不需要，可省略
+
+### 4.2   函数的参数
+
+参数的运用示例如下：
+
+```
+# 代码
+def love (x, y):
+    love_story = x + y
+    print(f"{x}和{y}加在一起就是，{love_story}长长久久！")
+
+love("北原伊织", "古手川千纱")
+
+# 编译结果
+北原伊织和古手川千纱加在一起就是，北原伊织古手川千纱长长久久！
+```
+
+**练习案例：升级版自动查验魅力值**
+
+定义一个函数，名称任意，并接受一个参数传入（数字类型，表示魅力值）
+
+在函数内进行魅力值判断（正常范围：大于等于60.0），并输出如下内容：
+
+> 欢迎使用魅力测试仪！请输入您的魅力值
+> 您的魅力值是：75.5，欢迎大帅比光临！
+
+> 欢迎使用魅力测试仪！
+> 您的魅力值是：55.5，抱歉哦，你没有被邀请方式 ಥ_ಥ
+
+```
+# 代码
+def romantic (num):
+    print("欢迎使用魅力测试仪！请输入您的魅力值")
+    if num >= 60.0:
+        print(f"您的魅力值是：{num}，欢迎大帅比光临！")
+    else:
+        print(f"您的魅力值是：{num}，抱歉哦，你没有被邀请方式 ಥ_ಥ")
+
+romantic(90)
+print()
+romantic(40)
+
+# 编译结果
+欢迎使用魅力测试仪！请输入您的魅力值
+您的魅力值是：90，欢迎大帅比光临！
+
+欢迎使用魅力测试仪！请输入您的魅力值
+您的魅力值是：40，抱歉哦，你没有被邀请方式 ಥ_ಥ
+```
+
+### 4.3   函数的返回值
+
+示例：
+
+```
+# 代码
+def a (x, y):
+    b = x + y
+    return b
+
+c = a(1, 2)
+print(c)
+
+# 编译结果
+3
+```
+
+Q：如果函数没有用返回值return，那么函数有返回值吗？
+
+A：**有的**，python中**特殊的字面量：None**，其类型是**<class 'NoneType'>**，无返回值的函数返回的是None这个字面量
+
+**用处在哪呢？**
+
+- 在if判断中，None等同于Flase
+- 定义一些暂时不需要的变量
+
+### 4.4   函数的嵌套调用
+
+示例：
+
+```
+# 代码
+def a ():
+    print("我爱鸣上悠！")
+
+def b ():
+    print("我爱雨宫莲！")
+    a()
+    print("我爱结城理！")
+
+b()
+
+# 编译结果
+我爱雨宫莲！
+我爱鸣上悠！
+我爱结城理！
+```
+
+### 4.5   变量的作用域
+
+变量的**作用域**，是指变量的作用范围（变量在哪里可用，在哪里不可用）
+
+主要分为**局部变量和全局变量**
+
+**局部变量就是定义在函数体内部的变量，即只在函数体内部生效**
+
+**全局变量**，就把变量定义在函数的外面就OK了
+
+**global关键字**，能把内部定义的变量变成全局变量
+
+示例：
+
+```
+# 代码
+a = "我想玩使命召唤：现代战争4"
+
+def b ():
+    print(a)
+
+def c ():
+    global a
+    a = "我想玩龙之剑：觉醒"
+    print(a)
+
+b()
+c()
+print(a)
+
+# 编译结果
+我想玩使命召唤：现代战争4
+我想玩龙之剑：觉醒
+我想玩龙之剑：觉醒
+```
+
+### 4.6   综合案例
+
+帅比专用ATM
+
+- 主菜单效果
+
+```
+----------主菜单----------
+帅比，您好，欢迎来到大帅比银行ATM，请选择操作：
+查询余额    【输入1】
+存款        【输入2】
+取款        【输入3】
+退出        【输入4】
+请输入您的选择：
+```
+
+- 查询余额效果
+
+```
+----------查询余额----------
+帅比，您好，您的余额剩余：5000000元
+```
+
+- 存、取款效果
+
+```
+----------取款----------
+帅比，您好，您取款50000元成功
+帅比，您好，您的余额剩余：4950000元
+```
+
+- 定义一个全局变量：money，用来记录银行卡余额（默认5000000）
+- 定义一个全局变量：name，用来记录客户姓名（启动程序时输入）
+- 定义如下的函数：
+  - **查询余额函数**
+  - **存款函数**
+  - **取款函数**
+  - **主菜单函数**
+- 要求：
+- 程序启动后要求输入客户姓名
+- 查询余额、存款、取款后都会返回主菜单
+- 存款、取款后，都应显示一下当前余额
+- 客户选择退出或输入错误，程序会退出，否则一直运行
+
+
+
+```
+# 代码（以下为本人第一次写出来的）
+money = 5000000
+money = int(money)
+i = 1
+
+def balance():
+    print("----------查询余额----------")
+    global money
+    print(f"{name}，您好，您的余额剩余：{money}元")
+
+def deposit():
+    deposit_money = input()
+    print("----------存款----------")
+    print(f"{name}，您好，您存款{deposit_money}元成功")
+    global money
+    money = money + int(deposit_money)
+    print(f"{name}，您好，您的余额剩余：{money}元")
+
+def withdraw():
+    withdraw_money = input()
+    print("----------取款----------")
+    print(f"{name}，您好，您取款{withdraw_money}元成功")
+    global money
+    money = money - int(withdraw_money)
+    print(f"{name}，您好，您的余额剩余：{money}元")
+
+name = input("请输入您的姓名：")
+while i == 1:
+    print("----------主菜单----------")
+    print(f"{name}，您好，欢迎来到大帅比银行ATM，请选择操作：")
+    print("查询余额\t\t【输入1】")
+    print("存款\t\t\t【输入2】")
+    print("取款\t\t\t【输入3】")
+    print("退出\t\t\t【输入4】")
+    choice = input("请输入您的选择：")
+    if choice == "1":
+        balance()
+        continue
+    if choice == "2":
+        deposit()
+        continue
+    if choice == "3":
+        withdraw()
+        continue
+    if choice == "4":
+        i = 0
+        break
+    else:
+        i = 0
+        break
+
+# 编译结果
+请输入您的姓名：jackylover
+----------主菜单----------
+jackylover，您好，欢迎来到大帅比银行ATM，请选择操作：
+查询余额		【输入1】
+存款			【输入2】
+取款			【输入3】
+退出			【输入4】
+请输入您的选择：1
+----------查询余额----------
+jackylover，您好，您的余额剩余：5000000元
+----------主菜单----------
+jackylover，您好，欢迎来到大帅比银行ATM，请选择操作：
+查询余额		【输入1】
+存款			【输入2】
+取款			【输入3】
+退出			【输入4】
+请输入您的选择：2
+6000
+----------存款----------
+jackylover，您好，您存款6000元成功
+jackylover，您好，您的余额剩余：5006000元
+----------主菜单----------
+jackylover，您好，欢迎来到大帅比银行ATM，请选择操作：
+查询余额		【输入1】
+存款			【输入2】
+取款			【输入3】
+退出			【输入4】
+请输入您的选择：3
+9000
+----------取款----------
+jackylover，您好，您取款9000元成功
+jackylover，您好，您的余额剩余：4997000元
+----------主菜单----------
+jackylover，您好，欢迎来到大帅比银行ATM，请选择操作：
+查询余额		【输入1】
+存款			【输入2】
+取款			【输入3】
+退出			【输入4】
+请输入您的选择：4
+
+进程已结束，退出代码为 0
+```
+
+```
+附上deep seek写的优化版代码
+# 定义全局变量
+money = 5000000
+name = None # 先定义，后续接收用户输入
+
+# 要求1：输入客户姓名
+name = input("请输入您的姓名：")
+
+# 定义查询余额函数
+def query_balance():
+    print("----------查询余额----------")
+    print(f"{name}，您好，您的余额剩余：{money}元")
+
+# 定义存款函数
+def deposit():
+    global money
+    print("----------存款----------")
+    deposit_money = int(input("请输入您要存款的金额："))
+    money += deposit_money
+    print(f"{name}，您好，您存款{deposit_money}元成功")
+    print(f"{name}，您好，您的余额剩余：{money}元")
+
+# 定义取款函数
+def withdraw():
+    global money
+    print("----------取款----------")
+    withdraw_money = int(input("请输入您要取款的金额："))
+    if withdraw_money > money:
+        print("余额不足，取款失败！")
+        return # 余额不足直接结束函数，不扣钱
+    money -= withdraw_money
+    print(f"{name}，您好，您取款{withdraw_money}元成功")
+    print(f"{name}，您好，您的余额剩余：{money}元")
+
+# 定义主菜单函数
+def main_menu():
+    print("----------主菜单----------")
+    print(f"{name}，您好，欢迎来到大帅比银行ATM，请选择操作：")
+    print("\t查询余额\t【输入1】")
+    print("\t存款\t\t【输入2】")
+    print("\t取款\t\t【输入3】")
+    print("\t退出\t\t【输入4】")
+
+# 主循环
+while True:
+    main_menu() # 每次循环先展示主菜单
+    choice = input("请输入您的选择：")
+    
+    if choice == "1":
+        query_balance()
+    elif choice == "2":
+        deposit()
+    elif choice == "3":
+        withdraw()
+    elif choice == "4":
+        print("程序已退出，欢迎下次光临！")
+        break
+    else:
+        # 要求：输入错误程序退出
+        print("输入错误，程序退出。")
+        break
+```
+
+```
+# 还有一种更简洁的写法
+money = 5000000
+name = None
+name = input("请输入您的姓名：")
+
+def query(show_header):
+	if show_header:
+		print("----------查询余额----------")
+	print(f"{name}，您好，您的余额剩余：{money}元")
+	
+def saving(num):
+	global money
+	money += num
+	print(f"{name}，您好，您存款{num}元成功")
+	query(False)
+	
+def get_money(num):
+	global money
+	money -= num
+	print(f"{name}，您好，您取款{num}元成功")
+	query(False)
+	
+def main():
+	print("----------主菜单----------")
+	print(f"{name}，您好，欢迎来到大帅比银行ATM，请选择操作：")
+	print("查询余额\t\t【输入1】")
+	print("存款\t\t\t【输入2】")
+	print("取款\t\t\t【输入3】")
+	print("退出\t\t\t【输入4】")
+	return input("请输入您的选择：")
+
+while True:
+	keyboard_input = main()
+	if keyboard_input == "1":
+		query(True)
+		continue
+	elif keyboard_input == "2":
+		num = int(input("你想存入多少钱？请输入："))
+		saving(num)
+		continue
+	elif keyboard_input == "3":
+		num = int(input("你想存取出多少钱？请输入："))
+		get_money(num)
+		continue
+	elif keyboard_input == "4":
+		print("程序退出")
+		break
+	else:
+		print("程序退出")
+		break
+```
+
+## 第五章   python数据容器
+
+### 5.1   数据容器入门
+
+python数据容器的定义：
+
+**一种可以容纳多份数据的数据类型，每一份数据称之为一个元素，每一个元素可以是任意类型的数据**
+
+数据容器的分类：
+
+- 列表
+- 元组
+- 集合
+- 字典
+- 字符串
+
+### 5.2   数据容器：List（列表）
+
+示例演示：
+
+```
+# 代码
+name_list = ["JRPG游戏", "肉鸽类型游戏", "第一人称大逃杀类型游戏"]
+print(name_list)
+print(type(name_list))
+
+# 编译结果
+['JRPG游戏', '肉鸽类型游戏', '第一人称大逃杀类型游戏']
+<class 'list'>
+```
+
+**注意：列表中存储的类型可以为不同的数据类型，比如可以整数，布尔，字符串都塞进一个列表里，而且列表支持嵌套，比如可以有[[123, 1234], [125, 1269]]**
+
+Q：如何从列表中取出特定位置的数据呢？
+
+A：使用**下标索引**
+
+- 正向索引，从前向后，第一个为0，依次递增
+
+```
+# 代码
+name_list = ["JRPG游戏", "肉鸽类型游戏", "第一人称大逃杀类型游戏"]
+print(name_list[0])
+print(name_list[1])
+print(name_list[2])
+
+# 编译结果
+JRPG游戏
+肉鸽类型游戏
+第一人称大逃杀类型游戏
+```
+
+- 反向索引，从后向前，第一个为-1，依次递减
+
+```
+# 代码
+name_list = ["JRPG游戏", "肉鸽类型游戏", "第一人称大逃杀类型游戏"]
+print(name_list[-1])
+print(name_list[-2])
+print(name_list[-3])
+
+# 编译结果
+第一人称大逃杀类型游戏
+肉鸽类型游戏
+JRPG游戏
+```
+
+- 嵌套列表的下标索引
+
+```
+# 代码
+name_list = [["南京", "荷花", "玉溪"], [458, 886, True]]
+print(name_list[0][1])
+print(name_list[-2][-2])
+print(name_list[1][2])
+print(name_list[-1][-1])
+
+# 编译结果
+荷花
+荷花
+True
+True
+```
+
+### 5.3   列表的常用操作和方法
+
+Q：**函数**和**方法**的区别是什么？
+
+函数是一个**封装的代码单元**，可以提供特定的功能
+
+```
+def add(x, y)
+	return x + y
+```
+
+在python中，如果将函数定义为clss（类）的成员，那么函数就变成了**方法**
+
+```
+class Student:
+	def add(x, y):
+		return x + y
+```
+
